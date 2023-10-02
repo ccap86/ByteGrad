@@ -294,7 +294,7 @@ a {
 }
 .gallery__img-wrapper:nth-child(5) {
   grid-column: 2/3;
-  grid-row: 4/7;
+  grid-row: 4/-1;
 }
 .gallery__img-wrapper:nth-child(6) {
   grid-column: 3/4;
@@ -302,11 +302,11 @@ a {
 }
 .gallery__img-wrapper:nth-child(7) {
   grid-column: 1/2;
-  grid-row: 6/7;
+  grid-row: 6/-1;
 }
 .gallery__img-wrapper:nth-child(8) {
   grid-column: 3/4;
-  grid-row: 5/7;
+  grid-row: 5/-1;
 }
 .gallery__img {
   height: 100%;
