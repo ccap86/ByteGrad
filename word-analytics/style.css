@@ -94,7 +94,14 @@ body {
 }
 
 .stat__number {
-    columns: #4d5457;
+    color: #4d5457;
+    font-weight: 600;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.stat__number--limit {
+    color: red;
     font-weight: 600;
     font-size: 35px;
     margin-bottom: 10px;
