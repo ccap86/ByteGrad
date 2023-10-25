@@ -102,9 +102,7 @@ body {
 
 .stat__number--limit {
     color: red;
-    font-weight: 600;
-    font-size: 35px;
-    margin-bottom: 10px;
+    
 }
 
 .second__heading {
