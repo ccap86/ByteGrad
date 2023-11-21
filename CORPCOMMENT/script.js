@@ -141,6 +141,41 @@ const submitHandler = event => {
 formEl.addEventListener('submit', submitHandler);
 
 // -- Feedback List Component --
+const clickHandler = event => {
+    // Get clicked HTML element
+  const clickedEl = event.target;
+
+  // determine if user intended to upvote or expand
+  const upvoteIntention = clickedEl.className.includes('upvote');
+
+    // run the appropriate logic 
+  if (upvoteIntention) {
+    // get the closest upvote button
+    const upvoteBtnEl = clickedEl.closest('.upvote');
+
+    // disable upvote button
+    upvoteBtnEl.disabled = true;
+
+    // select upvote count within the current upvote button that was clicked
+    const upvoteCountEl = upvoteBtnEl.querySelector('.upvote__count');
+
+    // get currently displayed upvote count as number (add + in front to convert to number)
+    let upvoteCount =  +upvoteCountEl.textContent;
+    
+
+    // set upvote count and inc by 1
+    upvoteCountEl.textContent = ++upvoteCount;
+  }
+  else {
+    // expand the clicked feedback item
+    
+    clickedEl.closest('.feedback').classList.toggle('feedback--expand');
+
+  }
+};
+
+feedbackListEl.addEventListener('click', clickHandler);
+
 fetch(`${BASE_API_URL}/feedbacks`)
 .then(response => response.json())
 .then(data => {
