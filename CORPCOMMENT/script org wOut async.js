@@ -2,6 +2,7 @@
 const MAX_CHARS = 150;
 const BASE_API_URL = 'https://bytegrad.com/course-assets/js/1/api';
 
+
 const textareaEl = document.querySelector('.form__textarea');
 const counterEl = document.querySelector('.counter');
 const formEl = document.querySelector('.form');
@@ -31,7 +32,9 @@ const renderFeedbackItem = feedbackItem => {
 
     // insert new feedback item in list
     feedbackListEl.insertAdjacentHTML("beforeend", feedbackItemHTML);
+
 }
+
 
 // --- counter component
 ( ()=> {
@@ -46,8 +49,10 @@ const renderFeedbackItem = feedbackItem => {
         // calculate number of characters left (max - currently typed)
         const charsLeft = maxNrChars - nrCharsTyped;
         
+        
         // show number of characters left
-        counterEl.textContent = charsLeft;    
+        counterEl.textContent = charsLeft;
+    
     }
     
     textareaEl.addEventListener('input', inputHandler);
@@ -139,7 +144,7 @@ const renderFeedbackItem = feedbackItem => {
 })();
 
 // -- Feedback List Component --
-( async () => {
+( () => {
 
     const clickHandler =  event => {
         // Get clicked HTML element
@@ -161,37 +166,35 @@ const renderFeedbackItem = feedbackItem => {
     
         // get currently displayed upvote count as number (add + in front to convert to number)
         let upvoteCount =  +upvoteCountEl.textContent;
+        
     
         // set upvote count and inc by 1
         upvoteCountEl.textContent = ++upvoteCount;
       }
       else {
         // expand the clicked feedback item
+        
         clickedEl.closest('.feedback').classList.toggle('feedback--expand');
+    
       }
     };
     
     feedbackListEl.addEventListener('click',  clickHandler);
-    try {
-        const res = await fetch(`${BASE_API_URL}/feedbacks`);
-        const data = await res.json();
-        
-            if(!res.ok) {
-                console.log('error with network');
-                return;
-            }
-                // remove spinner element
-                //spinnerEl.classList.remove("spinner");    
-                spinnerEl.remove();    
-            
-                // iterate over each element in the feedbacks array and render it in the list
-                data.feedbacks.forEach(feedbackItem => renderFeedbackItem(feedbackItem));
     
-            }catch(error)  {
-            feedbackListEl.textContent = `Failed to fetch feedback item. Error message: ${error.message}`;
-        };
-    }
-)();
+    fetch(`${BASE_API_URL}/feedbacks`)
+    .then(response => response.json())
+    .then(data => {
+        // remove spinner element
+        //spinnerEl.classList.remove("spinner");    
+        spinnerEl.remove();    
+    
+        // iterate over each element in the feedbacks array and render it in the list
+        data.feedbacks.forEach(feedbackItem => renderFeedbackItem(feedbackItem));
+    })
+    .catch(error => {
+        feedbackListEl.textContent = `Failed to fetch feedback item. Error message: ${error.message}`;
+    });
+})();
 
 
 // -- HASHTAG LIST COMPONENT --
@@ -200,6 +203,8 @@ const renderFeedbackItem = feedbackItem => {
     const clickHandler = event => {
            // -- get the clicked element
            const clickedEl = event.target;
+    
+           
     
         // -- stop function if clicked happen outside of button
         if(clickedEl.className === 'hashtags') return;
@@ -223,9 +228,12 @@ const renderFeedbackItem = feedbackItem => {
             
             childNode.remove();
         }
+         
     });
+    
         
     }
+    
     
     hashtagListEl.addEventListener('click', clickHandler);
 })();
