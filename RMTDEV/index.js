@@ -31,15 +31,47 @@ const submitHandler = event => {
     const searchText = searchInputEl.value;
     
     // validation example of reg expression 
-    const forbiddenPattern = /python/;
+    const forbiddenPattern = /[0-9]/;
     const patternMatch = forbiddenPattern.test(searchText);
     if(patternMatch){
-        errorTextEl.textContent = 'You search may not contain ' + forbiddenPattern;
+        errorTextEl.textContent = 'You search may not contain numbers';
         errorEl.classList.add('error--visible'); 
         setTimeout( ()=> {
             errorEl.classList.remove('error--visible');
         },3500);
     }
+
+    // blur input
+    searchInputEl.blur();
+
+    // render spinner
+    spinnerSearchEl.classList.add('spinner--visible');
+    
+    fetch(`https://bytegrad.com/course-assets/js/2/api/jobs?search=${searchText}`)
+        .then(response => {
+            if(!response.ok){
+                console.log('Something went wrong');
+                return;
+            }
+
+            return response.json();
+        })
+        .then(data => {
+            // extract job items
+            const { jobItems } = data;
+
+            // stop spinner
+            spinnerSearchEl.classList.remove('spinner--visible');
+
+            // render the number of results
+            numberEl.textContent = jobItems.length;
+
+            // render job items  in search  job list
+        })
+        .catch(error => console.log(error));
+        // .catch(error =>{
+        //     console.log(error);
+        // });
 }
 
 
