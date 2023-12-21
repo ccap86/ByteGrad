@@ -60,6 +60,9 @@ const submitHandler = event => {
             // extract job items
             const { jobItems } = data;
 
+            // remove prev job items
+            jobListSearchEl.innerHTML = '';
+
             // stop spinner
             spinnerSearchEl.classList.remove('spinner--visible');
 
@@ -67,7 +70,7 @@ const submitHandler = event => {
             numberEl.textContent = jobItems.length;
 
             // render job items  in search  job list
-            jobItems.forEach(jobItem => {
+            jobItems.slice(0,7).forEach(jobItem => {
 
                 const newJobItemHTML = `
                     <li class="job-item">
@@ -100,3 +103,32 @@ const submitHandler = event => {
 
 
 searchFormEl.addEventListener('submit', submitHandler);
+
+// -- job list component
+
+const clickHandler = event => {
+    // prevent default behavior 
+    event.preventDefault();
+
+    // get clicked job item element
+    const jobItemEl = event.target.closest('.job-item');
+    
+    // remove previous clicked element
+    // -- first way to check truthy
+    // const activeJobItemEl = document.querySelector('.job-item--active');
+    // if ( activeJobItemEl) {
+    //      activeJobItemEl.classList.remove('job-item--active');
+    //     }
+    // -- second way to check truthy
+    // document.querySelector('.job-item--active') && document.querySelector('.job-item--active').classList.remove('job-item--active');
+    
+    document.querySelector('.job-item--active')?.classList.remove('job-item--active');
+
+
+    // add active class
+    jobItemEl.classList.add('job-item--active');
+    
+}
+
+
+jobListSearchEl.addEventListener('click', clickHandler);
