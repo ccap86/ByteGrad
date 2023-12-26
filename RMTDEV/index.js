@@ -220,3 +220,4 @@ const clickHandler = event => {
 
 
 jobListSearchEl.addEventListener('click', clickHandler);
+
