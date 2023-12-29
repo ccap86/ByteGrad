@@ -1,3 +1,10 @@
+// CONSTANTS
+export const BASE_API_URL = 'https://bytegrad.com/course-assets/js/2/api';
+export const DEFAULT_DISPLAY_TIME = 3500;
+
+
+
+// SELECTORS
 // Selectors taken from below video - confirmed by checking html doc
 export const bookmarksBtnEl = document.querySelector('.bookmarks-btn');
 export const errorEl = document.querySelector('.error');
