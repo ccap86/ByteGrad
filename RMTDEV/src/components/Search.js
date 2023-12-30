@@ -34,11 +34,13 @@ const submitHandler = event => {
     spinnerRender('search');
     //spinnerSearchEl.classList.add('spinner--visible');
     
-    fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
+    fetch(`${BASE_API_URL}/ajobs?search=${searchText}`)
         .then(response => {
             if(!response.ok){
-                console.log('Something went wrong');
-                return;
+                throw {
+                    message: 'Resource issue (e.g., resource doesn\'t exist) or server issue',
+                    name: 'error'
+                };
             }
 
             return response.json();
@@ -60,10 +62,14 @@ const submitHandler = event => {
             // render job items  in search  job list
             renderJobList( jobItems);
         })
-        .catch(error => console.log(error));
+        //.catch(error => console.log(error));
         // .catch(error =>{
         //     console.log(error);
         // });
+        // update to make a bit more sophisticated 
+        .catch(error =>{
+            console.log(error.message);
+        });
 }
 
 
