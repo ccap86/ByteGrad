@@ -34,7 +34,7 @@ const submitHandler = event => {
     spinnerRender('search');
     //spinnerSearchEl.classList.add('spinner--visible');
     
-    fetch(`${BASE_API_URL}/ajobs?search=${searchText}`)
+    fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
         .then(response => {
             if(!response.ok){
                 throw {
@@ -68,7 +68,8 @@ const submitHandler = event => {
         // });
         // update to make a bit more sophisticated 
         .catch(error =>{
-            console.log(error.message);
+            spinnerRender('search');
+            renderError(error.message);
         });
 }
 
