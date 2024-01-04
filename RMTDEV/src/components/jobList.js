@@ -3,7 +3,7 @@ import {
     jobListSearchEl,
     jobDetailsContentEl,
 } from '../common.js';
-import spinnerRender from './Spinner.js';
+import renderSpinner from './Spinner.js';
 import renderJobDetails from './JobDetails.js';
 import renderError from './Error.js';
 
@@ -59,14 +59,14 @@ const clickHandler = event => {
     jobDetailsContentEl.innerHTML = '';
 
     // render spinner
-    spinnerRender('jobDetails');
+    renderSpinner('jobDetails');
 //    spinnerJobDetailsEl.classList.add('spinner--visible');
 
     // get job item id
     const id = jobItemEl.children[0].getAttribute('href');
 
     // fetch id data
-    fetch(`${BASE_API_URL}/Ajobs/${id}`)
+    fetch(`${BASE_API_URL}/jobs/${id}`)
     .then(response => {
         if(!response.ok){
             throw {
@@ -82,7 +82,7 @@ const clickHandler = event => {
             const { jobItem } = data;
      
             // remove spinner
-            spinnerRender('jobDetails');
+            renderSpinner('jobDetails');
             //spinnerJobDetailsEl.classList.remove('spinner--visible');
 
             // render job detail
@@ -93,7 +93,7 @@ const clickHandler = event => {
         )
         //.catch(error => console.log(error));
         .catch(error =>{
-            spinnerRender('jobDetail');
+            renderSpinner('jobDetail');
             renderError(error.message);
         });
     

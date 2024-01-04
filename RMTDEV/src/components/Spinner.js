@@ -3,7 +3,7 @@ import {
     spinnerJobDetailsEl
 } from '../common.js';
 
-const spinnerRender = whichSpinner => {
+const renderSpinner = whichSpinner => {
     // spinnerSearchEl.classList.add('spinner--visible');
     // spinnerJobDetailsEl.classList.add('spinner--visible');
     const spinnerEl = whichSpinner === 'search' ? spinnerSearchEl : spinnerJobDetailsEl;
@@ -11,4 +11,4 @@ const spinnerRender = whichSpinner => {
 
 };
 
-export default spinnerRender;
+export default renderSpinner;

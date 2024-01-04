@@ -12,7 +12,7 @@ import renderError from './Error.js'; // exported as a default
 import renderJobList from './jobList.js'; // exported as a default
 
 
-const submitHandler = event => {
+const submitHandler = async event => {
     // prevent default behavior 
     event.preventDefault();
 
@@ -34,44 +34,77 @@ const submitHandler = event => {
     spinnerRender('search');
     //spinnerSearchEl.classList.add('spinner--visible');
     
-    fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
-        .then(response => {
-            if(!response.ok){
-                throw {
-                    message: 'Resource issue (e.g., resource doesn\'t exist) or server issue',
-                    name: 'error'
-                };
-            }
 
-            return response.json();
-        })
-        .then(data => {
-            // extract job items
-            const { jobItems } = data;
+    // fetch search results
+    try {
+        const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`Resource issue (e.g. resource doesn\'t exist) or server issue`);
+        }
 
-            // remove prev job items
-            jobListSearchEl.innerHTML = '';
 
-            // stop spinner
-            spinnerRender('search');
-            //spinnerSearchEl.classList.remove('spinner--visible');
+        // extract job items
+        const { jobItems } = data;
+    
+        // remove prev job items
+        //jobListSearchEl.innerHTML = '';
+    
+         // stop spinner
+        spinnerRender('search');
+    
+        // render the number of results
+        numberEl.textContent = jobItems.length;
+    
+        // render job items  in search  job list
+        renderJobList( jobItems);
+    }
+    catch (error) {
+        renderSpinner('search');
+        renderError(error.message);
+    }
 
-            // render the number of results
-            numberEl.textContent = jobItems.length;
 
-            // render job items  in search  job list
-            renderJobList( jobItems);
-        })
-        //.catch(error => console.log(error));
-        // .catch(error =>{
-        //     console.log(error);
-        // });
-        // update to make a bit more sophisticated 
-        .catch(error =>{
-            spinnerRender('search');
-            renderError(error.message);
-        });
-}
+
+
+    // fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
+    //     .then(response => {
+    //         if(!response.ok){
+    //             throw {
+    //                 message: 'Resource issue (e.g., resource doesn\'t exist) or server issue',
+    //                 name: 'error'
+    //             };
+    //         }
+
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         // extract job items
+    //         const { jobItems } = data;
+
+    //         // remove prev job items
+    //         jobListSearchEl.innerHTML = '';
+
+    //         // stop spinner
+    //         spinnerRender('search');
+    //         //spinnerSearchEl.classList.remove('spinner--visible');
+
+    //         // render the number of results
+    //         numberEl.textContent = jobItems.length;
+
+    //         // render job items  in search  job list
+    //         renderJobList( jobItems);
+    //     })
+    //     //.catch(error => console.log(error));
+    //     // .catch(error =>{
+    //     //     console.log(error);
+    //     // });
+    //     // update to make a bit more sophisticated 
+    //     .catch(error =>{
+    //         spinnerRender('search');
+    //         renderError(error.message);
+    //     });
+};
 
 
 searchFormEl.addEventListener('submit', submitHandler);
