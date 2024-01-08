@@ -4,10 +4,11 @@ import {
     searchFormEl,
     spinnerSearchEl,
     jobListSearchEl,
-    numberEl
+    numberEl,
+    getData
 } from '../common.js';
 
-import spinnerRender from './Spinner.js';
+import renderSpinner from './Spinner.js';
 import renderError from './Error.js'; // exported as a default
 import renderJobList from './jobList.js'; // exported as a default
 
@@ -31,18 +32,18 @@ const submitHandler = async event => {
     searchInputEl.blur();
 
     // render spinner
-    spinnerRender('search');
+    renderSpinner('search');
     //spinnerSearchEl.classList.add('spinner--visible');
-    
 
-    // fetch search results
     try {
-        const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(`Resource issue (e.g. resource doesn\'t exist) or server issue`);
-        }
+        // fetch search results
+        const data = await getData(`${BASE_API_URL}/jobs?search=${searchText}`);
+//        const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
+        // const data = await response.json();
 
+        // if (!response.ok) { // 4xx, 5xx status code
+        //     throw new Error(data.description);
+        // }
 
         // extract job items
         const { jobItems } = data;
@@ -51,7 +52,7 @@ const submitHandler = async event => {
         //jobListSearchEl.innerHTML = '';
     
          // stop spinner
-        spinnerRender('search');
+        renderSpinner('search');
     
         // render the number of results
         numberEl.textContent = jobItems.length;
@@ -64,47 +65,6 @@ const submitHandler = async event => {
         renderError(error.message);
     }
 
-
-
-
-    // fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
-    //     .then(response => {
-    //         if(!response.ok){
-    //             throw {
-    //                 message: 'Resource issue (e.g., resource doesn\'t exist) or server issue',
-    //                 name: 'error'
-    //             };
-    //         }
-
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         // extract job items
-    //         const { jobItems } = data;
-
-    //         // remove prev job items
-    //         jobListSearchEl.innerHTML = '';
-
-    //         // stop spinner
-    //         spinnerRender('search');
-    //         //spinnerSearchEl.classList.remove('spinner--visible');
-
-    //         // render the number of results
-    //         numberEl.textContent = jobItems.length;
-
-    //         // render job items  in search  job list
-    //         renderJobList( jobItems);
-    //     })
-    //     //.catch(error => console.log(error));
-    //     // .catch(error =>{
-    //     //     console.log(error);
-    //     // });
-    //     // update to make a bit more sophisticated 
-    //     .catch(error =>{
-    //         spinnerRender('search');
-    //         renderError(error.message);
-    //     });
 };
-
 
 searchFormEl.addEventListener('submit', submitHandler);

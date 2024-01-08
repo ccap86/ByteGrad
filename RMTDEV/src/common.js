@@ -2,8 +2,6 @@
 export const BASE_API_URL = 'https://bytegrad.com/course-assets/js/2/api';
 export const DEFAULT_DISPLAY_TIME = 3500;
 
-
-
 // SELECTORS
 // Selectors taken from below video - confirmed by checking html doc
 export const bookmarksBtnEl = document.querySelector('.bookmarks-btn');
@@ -26,3 +24,16 @@ export const sortingBtnRelevantEl = document.querySelector(".sorting__button--re
 export const sortingBtnRecentEl = document.querySelector(".sorting__button--recent");
 export const spinnerSearchEl = document.querySelector(".spinner--search");
 export const spinnerJobDetailsEl = document.querySelector(".spinner--job-details");
+
+// HELPER / UTILITIES  FUNCTIONS
+
+export const getData = async completeURL => {
+    const response = await fetch(completeURL);
+    const data = await response.json();
+    
+
+    if (!response.ok) { // 4xx, 5xx status code
+        throw new Error(data.description);
+    }
+    return data;
+}
