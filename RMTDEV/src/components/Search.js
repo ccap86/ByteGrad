@@ -1,8 +1,8 @@
 import {
     BASE_API_URL,
+    state,
     searchInputEl,
     searchFormEl,
-    spinnerSearchEl,
     jobListSearchEl,
     numberEl,
     getData
@@ -31,6 +31,9 @@ const submitHandler = async event => {
     // blur input
     searchInputEl.blur();
 
+    // remove previous job items
+    jobListSearchEl.innerHTML = '';
+
     // render spinner
     renderSpinner('search');
     //spinnerSearchEl.classList.add('spinner--visible');
@@ -47,6 +50,9 @@ const submitHandler = async event => {
 
         // extract job items
         const { jobItems } = data;
+
+        // update state
+        state.searchJobItems = jobItems;
     
         // remove prev job items
         //jobListSearchEl.innerHTML = '';
@@ -58,7 +64,7 @@ const submitHandler = async event => {
         numberEl.textContent = jobItems.length;
     
         // render job items  in search  job list
-        renderJobList( jobItems);
+        renderJobList();
     }
     catch (error) {
         renderSpinner('search');
