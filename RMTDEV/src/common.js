@@ -4,7 +4,8 @@ export const DEFAULT_DISPLAY_TIME = 3500;
 
 // STATE
 export const state = {
-    searchJobItems: []
+    searchJobItems: [],
+    currentPage: 1
 }
 
 
