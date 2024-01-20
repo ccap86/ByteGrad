@@ -21,6 +21,9 @@ const clickHandler = event => {
 
     // update state
     nextPage ? state.currentPage++ : state.currentPage--;
+
+    // render job items for that page
+    renderJobList();
 }
 
 

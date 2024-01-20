@@ -8,6 +8,7 @@ import {
 import renderSpinner from './Spinner.js';
 import renderJobDetails from './JobDetails.js';
 import renderError from './Error.js';
+const jobitemsPerPage = 7;
 
 const renderJobList = () =>{
     // remove previous job items
@@ -15,8 +16,11 @@ const renderJobList = () =>{
 
 
     // display job items
-    state.searchJobItems.slice(0,7).forEach(jobItem => {
-
+    //state.searchJobItems.slice(0,7).forEach(jobItem => {
+    state.searchJobItems.slice((state.currentPage*jobitemsPerPage),(state.currentPage*jobitemsPerPage)+jobitemsPerPage).forEach(jobItem => {
+    
+    //
+    
         const newJobItemHTML = `
             <li class="job-item">
                 <a class="job-item__link" href="${jobItem.id}">
