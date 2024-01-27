@@ -17,7 +17,7 @@ const renderJobList = () =>{
 
     // display job items
     //state.searchJobItems.slice(0,7).forEach(jobItem => {
-    state.searchJobItems.slice((state.currentPage*jobitemsPerPage),(state.currentPage*jobitemsPerPage)+jobitemsPerPage).forEach(jobItem => {
+    state.searchJobItems.slice((state.currentPage * 7) - 7, state.currentPage * 7).forEach(jobItem => {
     
     //
     
