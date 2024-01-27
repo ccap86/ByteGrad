@@ -8,7 +8,7 @@ import {
 import renderSpinner from './Spinner.js';
 import renderJobDetails from './JobDetails.js';
 import renderError from './Error.js';
-const jobitemsPerPage = 7;
+
 
 const renderJobList = () =>{
     // remove previous job items

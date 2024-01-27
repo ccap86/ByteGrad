@@ -5,6 +5,7 @@ import {
     paginationBtnBackEl,
     paginationNumberBackEl,
     paginationNumberNextEl,
+    numberEl
 
 } from '../common.js';
 import renderJobList from './jobList.js';
@@ -17,8 +18,23 @@ const renderPaginationButtons =()=> {
     } else {
         paginationBtnBackEl.classList.add('pagination__button--hidden');
     }
-
+    
+    // only display next button if more items
+    if(state.currentPage > (numberEl.textContent / 7)) {
+        paginationBtnNextEl.classList.add('pagination__button--hidden');
+    } else {
+        paginationBtnNextEl.classList.remove('pagination__button--hidden');
+    };
+    
     // update page number
+    paginationNumberNextEl.textContent = state.currentPage + 1;
+    paginationNumberBackEl.textContent = state.currentPage;
+    
+
+    // remove focus from button ('blur')
+    paginationBtnNextEl.blur();
+    paginationBtnBackEl.blur();
+    
 }
 
 
