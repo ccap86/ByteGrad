@@ -5,6 +5,8 @@ import {
     searchFormEl,
     jobListSearchEl,
     numberEl,
+    sortingBtnRecentEl,
+    sortingBtnRelevantEl,
     getData
 } from '../common.js';
 
@@ -45,6 +47,7 @@ const submitHandler = async event => {
         // const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
         // const data = await response.json();
 
+
         // if (!response.ok) { // 4xx, 5xx status code
         //     throw new Error(data.description);
         // }
@@ -59,6 +62,11 @@ const submitHandler = async event => {
         // remove prev job items
         //jobListSearchEl.innerHTML = '';
     
+        // reset sorting buttons
+        sortingBtnRecentEl.classList.remove('sorting__button--active');
+        sortingBtnRelevantEl.classList.add('sorting__button--active');
+
+
          // stop spinner
         renderSpinner('search');
     
@@ -67,6 +75,7 @@ const submitHandler = async event => {
     
         // reset pagination buttons
         renderPaginationButtons();
+
 
         // render job items  in search  job list
         renderJobList();
