@@ -1,4 +1,5 @@
 import {
+    RESULTS_PER_PAGE,
     state,
     paginationEl,
     paginationBtnNextEl,
@@ -13,6 +14,7 @@ import renderJobList from './jobList.js';
 // render pagination buttons
 const renderPaginationButtons =()=> {
     // render back button if greater than page 1 
+
     if(state.currentPage >= 2){
         paginationBtnBackEl.classList.remove('pagination__button--hidden');
     } else {
@@ -20,12 +22,12 @@ const renderPaginationButtons =()=> {
     }
     
     // only display next button if more items
-    if(state.currentPage > (numberEl.textContent / 7)) {
+    if(state.currentPage > (numberEl.textContent / RESULTS_PER_PAGE)) {
         paginationBtnNextEl.classList.add('pagination__button--hidden');
     } else {
         paginationBtnNextEl.classList.remove('pagination__button--hidden');
     };
-    
+
     // update page number
     paginationNumberNextEl.textContent = state.currentPage + 1;
     paginationNumberBackEl.textContent = state.currentPage;
@@ -65,3 +67,5 @@ const clickHandler = event => {
 
 // add an event listener to the button
 paginationEl.addEventListener('click', clickHandler);
+
+export default renderPaginationButtons;

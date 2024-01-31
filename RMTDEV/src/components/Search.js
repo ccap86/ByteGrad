@@ -11,6 +11,7 @@ import {
 import renderSpinner from './Spinner.js';
 import renderError from './Error.js'; // exported as a default
 import renderJobList from './jobList.js'; // exported as a default
+import renderPaginationButtons from './pagination.js';
 
 
 const submitHandler = async event => {
@@ -41,7 +42,7 @@ const submitHandler = async event => {
     try {
         // fetch search results
         const data = await getData(`${BASE_API_URL}/jobs?search=${searchText}`);
-//        const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
+        // const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
         // const data = await response.json();
 
         // if (!response.ok) { // 4xx, 5xx status code
@@ -53,6 +54,7 @@ const submitHandler = async event => {
 
         // update state
         state.searchJobItems = jobItems;
+        state.currentPage = 1;
     
         // remove prev job items
         //jobListSearchEl.innerHTML = '';
@@ -63,6 +65,9 @@ const submitHandler = async event => {
         // render the number of results
         numberEl.textContent = jobItems.length;
     
+        // reset pagination buttons
+        renderPaginationButtons();
+
         // render job items  in search  job list
         renderJobList();
     }

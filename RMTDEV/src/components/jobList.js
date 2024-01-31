@@ -1,5 +1,6 @@
 import {
     BASE_API_URL,
+    RESULTS_PER_PAGE,
     state,
     jobListSearchEl,
     jobDetailsContentEl,
@@ -16,8 +17,8 @@ const renderJobList = () =>{
 
 
     // display job items
-    //state.searchJobItems.slice(0,7).forEach(jobItem => {
-    state.searchJobItems.slice((state.currentPage * 7) - 7, state.currentPage * 7).forEach(jobItem => {
+    //state.searchJobItems.slice(0,RESULTS_PER_PAGE).forEach(jobItem => {
+    state.searchJobItems.slice((state.currentPage * RESULTS_PER_PAGE) - RESULTS_PER_PAGE, state.currentPage * RESULTS_PER_PAGE).forEach(jobItem => {
     
     //
     
