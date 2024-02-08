@@ -57,7 +57,8 @@ const renderJobDetails = jobItem => {
                 </footer>
                     `;
                 
-                jobDetailsContentEl.insertAdjacentHTML('beforeend', JobDetailsHTML);
+                // jobDetailsContentEl.insertAdjacentHTML('beforeend', JobDetailsHTML);
+                jobDetailsContentEl.innerHTML = JobDetailsHTML;
 }
 
 export default renderJobDetails;

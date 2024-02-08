@@ -18,9 +18,7 @@ const renderJobList = () =>{
 
     // display job items
     //state.searchJobItems.slice(0,RESULTS_PER_PAGE).forEach(jobItem => {
-    state.searchJobItems.slice((state.currentPage * RESULTS_PER_PAGE) - RESULTS_PER_PAGE, state.currentPage * RESULTS_PER_PAGE).forEach(jobItem => {
-    
-    //
+    state.searchJobItems.slice(state.currentPage * RESULTS_PER_PAGE - RESULTS_PER_PAGE, state.currentPage * RESULTS_PER_PAGE).forEach(jobItem => {
     
         const newJobItemHTML = `
             <li class="job-item">
@@ -44,7 +42,7 @@ const renderJobList = () =>{
         `;
         jobListSearchEl.insertAdjacentHTML('beforeend', newJobItemHTML);
     });
-}
+};
 
 const clickHandler = async event => {
     // prevent default behavior 
@@ -68,7 +66,8 @@ const clickHandler = async event => {
     const id = jobItemEl.children[0].getAttribute('href');
 
     // add item id to the url
-    history.pushState(null,'',`/#${id}`);
+    history.pushState(null,'',`/RMTDEV/#${id}`);
+//    http://127.0.0.1:5500/RMTDEV/#5565565652345245
 
     // fetch id data
 
