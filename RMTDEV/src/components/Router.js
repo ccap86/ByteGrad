@@ -1,6 +1,7 @@
 import {
 BASE_API_URL,
 jobDetailsContentEl,
+state,
 getData
 }  from '../common.js';
 import renderSpinner from './Spinner.js';
@@ -35,7 +36,10 @@ const loadHashChangeHandler = async () => {
             
             // get data
             const { jobItem } = data;
-             
+
+            // update state
+            state.activeJobItem = jobItem; 
+
             // remove spinner
             renderSpinner('job-details');
             //spinnerJobDetailsEl.classList.remove('spinner--visible');
