@@ -7,6 +7,22 @@ import {
 
 import renderJobList from './jobList.js';
 
+// check if bookmark is clicked
+const clickHandler = event => {
+    
+    // don't continue if click is outside bookmark button
+        //if (event.target.className.includes('bookmark')) 
+        if (!event.target.className.includes('bookmark')) return; 
+        
+    // update state
+    state.bookmarkJobItems.push(state.activeJobItem);
+
+    // update bookmark icon to active
+    document.querySelector('.job-info__bookmark-icon').classList.toggle('job-info__bookmark-icon--bookmarked');
+    
+    }
+
+
 const mouseEnterHandler = () => {
 
     // change look of bookmark button to look active
@@ -30,11 +46,6 @@ const mouseLeaveHandler = () => {
 
 
 
-const clickHandler = event => {
-
-    
-
-}
 
 
 
