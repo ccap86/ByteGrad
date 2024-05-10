@@ -12,10 +12,14 @@ const clickHandler = event => {
     
     // don't continue if click is outside bookmark button
         //if (event.target.className.includes('bookmark')) 
-        if (!event.target.className.includes('bookmark')) return; 
+    if (!event.target.className.includes('bookmark')) return; 
         
     // update state
-    state.bookmarkJobItems.push(state.activeJobItem);
+    if( state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === state.activeJobItem.id)){
+        state.bookmarkJobItems = state.bookmarkJobItems.filter(bookmarkJobItem => bookmarkJobItem.id !== state.activeJobItem.id);
+    }  else {
+        state.bookmarkJobItems.push(state.activeJobItem);
+    }
 
     // update bookmark icon to active
     document.querySelector('.job-info__bookmark-icon').classList.toggle('job-info__bookmark-icon--bookmarked');
@@ -31,6 +35,8 @@ const mouseEnterHandler = () => {
     // make  bookmark joblist visible 
     jobListBookmarksEl.classList.add('job-list--visible');
 
+    // render bookmarked joblist
+    renderJobList('bookmarks');
 
 }
 
