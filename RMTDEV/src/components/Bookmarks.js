@@ -2,7 +2,9 @@ import {
     state,
     bookmarksBtnEl,
     jobDetailsEl,
-    jobListBookmarksEl
+    jobListBookmarksEl,
+    
+
 } from '../common.js';
 
 import renderJobList from './jobList.js';
@@ -15,13 +17,16 @@ const clickHandler = event => {
     if (!event.target.className.includes('bookmark')) return; 
         
     // update state
-    if( state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === state.activeJobItem.id)){
+    if( state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === state.activeJobItem.id)) {
         state.bookmarkJobItems = state.bookmarkJobItems.filter(bookmarkJobItem => bookmarkJobItem.id !== state.activeJobItem.id);
     }  else {
         state.bookmarkJobItems.push(state.activeJobItem);
     }
-
-    // update bookmark icon to active
+    
+    // persist data using localstorage
+    localStorage.setItem('bookmarkJobItems', JSON.stringify(state.bookmarkJobItems));
+    
+    // // update bookmark icon to active
     document.querySelector('.job-info__bookmark-icon').classList.toggle('job-info__bookmark-icon--bookmarked');
     
     }

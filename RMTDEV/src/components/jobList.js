@@ -83,7 +83,9 @@ const clickHandler = async event => {
     const id = jobItemEl.children[0].getAttribute('href');
 
     // update active jobitem state
-    state.activeJobItem = state.searchJobItems.find(jobItem => jobItem.id === +id);
+    // create jobitem array with ALL jobitems
+    const allJobItems = [...state.searchJobItems, ...state.bookmarkJobItems];
+    state.activeJobItem = allJobItems.find(jobItem => jobItem.id === +id);
 
     // add item id to the url
     history.pushState(null,'',`/RMTDEV/#${id}`);
