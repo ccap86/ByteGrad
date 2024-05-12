@@ -72,7 +72,8 @@ const clickHandler = async event => {
     document.querySelectorAll('.job-item--active').forEach(jobItemWithActiveClass => jobItemWithActiveClass.classList.remove('job-item--active'));
 
     // add active class
-    jobItemEl.classList.add('job-item--active');
+    // don't need any longer since we set this <li class="job-item ${ state.activeJobItem.id === jobItem.id ? 'job-item--active' : ''}">
+    // jobItemEl.classList.add('job-item--active');
     
     // empty the job detail section
     jobDetailsContentEl.innerHTML = '';
@@ -87,6 +88,10 @@ const clickHandler = async event => {
     // create jobitem array with ALL jobitems
     const allJobItems = [...state.searchJobItems, ...state.bookmarkJobItems];
     state.activeJobItem = allJobItems.find(jobItem => jobItem.id === +id);
+
+    // render search job list
+    renderJobList();
+
 
     // add item id to the url
     history.pushState(null,'',`/RMTDEV/#${id}`);
@@ -113,6 +118,7 @@ const clickHandler = async event => {
         
         // render job detail
         renderJobDetails(jobItem);
+        
 
     } catch (error) {
         renderSpinner('job-details');
