@@ -50,7 +50,7 @@ const renderJobList = (whichJobList = 'search') => {
                         </div>
                     </div>
                     <div class="job-item__right">
-                        <i class="fa-solid fa-bookmark job-item__bookmark-icon"></i>
+                        <i class="fa-solid fa-bookmark job-item__bookmark-icon ${state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === jobItem.id) && 'job-item__bookmark-icon--bookmarked'}"></i>
                         <time class="job-item__time">${jobItem.daysAgo}d</time>
                     </div>
                 </a>
@@ -67,7 +67,8 @@ const clickHandler = async event => {
 
     // get clicked job item element
     const jobItemEl = event.target.closest('.job-item');
-      
+    
+    // remove previous active class from previous active job item
     document.querySelectorAll('.job-item--active').forEach(jobItemWithActiveClass => jobItemWithActiveClass.classList.remove('job-item--active'));
 
     // add active class

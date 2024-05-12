@@ -29,6 +29,9 @@ const clickHandler = event => {
     // // update bookmark icon to active
     document.querySelector('.job-info__bookmark-icon').classList.toggle('job-info__bookmark-icon--bookmarked');
     
+    //  render search  job list
+    renderJobList();
+
     }
 
 
