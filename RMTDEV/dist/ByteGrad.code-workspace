@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"name": "ByteGrad",
+			"path": "../.."
+		},
+		{
+			"name": "javascript",
+			"path": "../../../javascript"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "ByteGrad"
+	}
+}
