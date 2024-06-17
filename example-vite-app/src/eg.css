@@ -1,0 +1,20 @@
+h1 {
+  font-size: 14px;
+  color: black;
+  background-color: tan;
+}
+
+.heading {
+  font-size: 25px;
+}
+
+.span {
+  color: red;
+  fontsize: 55px;
+  background-color: blue;
+}
+
+.heading--big {
+  font-size: 35px;
+  color: white;
+}

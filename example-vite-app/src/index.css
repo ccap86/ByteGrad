@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count {
+  color: green;
+  font-size: 50px;
+}
+
+.count--limit {
+  color: red;
+}
