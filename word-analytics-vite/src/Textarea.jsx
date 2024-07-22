@@ -8,7 +8,8 @@ export default function Textarea() {
 
   const handleChange = (e) => {
     let newText = e.target.value;
-
+    // validation - basic check just two checks: <script> and '@'
+    // we could have used regex for more sophisticated
     if (newText.includes("<script>")) {
       setWarningText("Warning: No script tag allowed!");
       // setShowWarning(true);
@@ -17,6 +18,8 @@ export default function Textarea() {
       setWarningText("Warning: No @ symbol allowed!");
       // setShowWarning(true);
       newText = newText.replace("@", "");
+    } else {
+      setWarningText("");
     }
 
     setText(newText);
